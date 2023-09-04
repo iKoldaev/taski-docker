@@ -1,0 +1,3 @@
+# frontend/.dockerignore
+build
+node_modules
