@@ -1,10 +1,13 @@
 import os
+from distutils.util import strtobool
 from pathlib import Path
 
 from dotenv import load_dotenv
 
 
 load_dotenv()
+
+ALLOWED_HOSTS = list(os.getenv('ALLOWED_HOSTS', ['127.0.0.1', 'localhost']))
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -26,8 +29,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-ALLOWED_HOSTS = []
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 CORS_ORIGIN_WHITELIST = [
@@ -45,7 +46,7 @@ DATABASES = {
     }
 }
 
-DEBUG = os.getenv('DEBUG', False)
+DEBUG = strtobool(os.getenv('DEBUG', 'False'))
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -76,7 +77,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 
-SECRET_KEY = os.getenv('SECRET_KEY', '')
+SECRET_KEY = os.getenv(
+    'SECRET_KEY',
+    'django-insecure-j_89af+30&&4qm*8z9_(^zz8p4-ho8z_m6ylm0s$h!-p@on1_^'
+)
 
 STATIC_URL = '/static/'
 
